@@ -1,62 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import type { Bill } from "../../types/claim.types";
 import { formatCurrency } from "../../utils/format";
 import BillItemRow from "../ui/BillItemRow";
 
 interface Props {
-    bill: Bill;
+  bill: Bill;
 }
 
-const BillCard = React.memo(({ bill }: Props) => {
-    const [open, setOpen] = useState(false);
+const BillCardComponent = ({ bill }: Props) => {
+  const [open, setOpen] = useState(false);
 
-    return (
-        <div className="bg-white rounded-xl shadow-sm border">
-            <div
-                onClick={() => setOpen(!open)}
-                className="p-4 cursor-pointer flex justify-between items-center"
-            >
-                <div>
-                    <p className="font-semibold">
-                        {bill.bill.invoice_number}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                        {formatCurrency(bill.bill.net_amount)}
-                    </p>
-                </div>
+  const toggle = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
 
-                <span className="text-sm text-blue-500">
-                    {open ? "Hide" : "View"}
-                </span>
-            </div>
+  const { invoice_number, bill_date, page_number, net_amount } =
+    bill.bill;
 
-            {open && (
-                <div className="border-t p-4 overflow-x-auto">
-                    <table className="w-full text-sm">
-                        <thead className="text-left text-gray-500 border-b">
-                            <tr>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>NME</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {bill.items.map((item) => (
-                                <BillItemRow
-                                    key={item.item_id}
-                                    name={item.item_name}
-                                    category={item.category}
-                                    amount={item.final_amount}
-                                    isNme={item.is_nme}
-                                />
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+  return (
+    <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
+      {/* Header */}
+      <button
+        onClick={toggle}
+        className="w-full p-4 flex justify-between items-center text-left hover:bg-gray-50 transition"
+        aria-expanded={open}
+      >
+        <div className="space-y-1">
+          <p className="font-semibold">{invoice_number}</p>
+          <p className="text-sm text-gray-500">
+            Date: {bill_date}
+          </p>
+          <p className="text-sm text-gray-500">
+            Page: {page_number}
+          </p>
+          <p className="text-sm font-medium">
+            {formatCurrency(net_amount)}
+          </p>
         </div>
-    );
-});
+
+        <span className="text-sm text-blue-600 font-medium">
+          {open ? "Hide" : "View"}
+        </span>
+      </button>
+
+      {/* Table */}
+      {open && (
+        <div className="border-t p-4 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-left text-gray-500 border-b">
+              <tr>
+                <th className="py-2">Name</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>NME</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bill.items.map((item) => (
+                <BillItemRow
+                  key={item.item_id}
+                  name={item.item_name}
+                  category={item.category}
+                  amount={item.final_amount}
+                  isNme={item.is_nme}
+                  deductionReason={item.deduction_reason}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const BillCard = React.memo(BillCardComponent);
 
 export default BillCard;

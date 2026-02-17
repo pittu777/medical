@@ -4,76 +4,80 @@ import SectionCard from "../ui/SectionCard";
 import IssueItem from "../ui/IssueItem";
 
 interface Props {
-    audit: AuditAnalysis;
+  audit: AuditAnalysis;
 }
 
 const AuditIssues = ({ audit }: Props) => {
-    return (
-        <SectionCard title="Audit Issues">
-            <div>
-                <h3 className="font-semibold text-red-600 mb-2">
-                    Medical Legibility Issues (
-                    {audit.medical_legibility.flagged_items.length})
-                </h3>
+  const sections = [
+    {
+      title: "Medical Legibility Issues",
+      color: "red" as const,
+      items: audit.medical_legibility.flagged_items.map(
+        (item) => ({
+          title: item.item_name,
+          fields: [
+            { label: "Reason", value: item.flag_reason },
+            {
+              label: "Recommendation",
+              value: item.recommendation,
+            },
+          ],
+        })
+      ),
+    },
+    {
+      title: "Policy Violations",
+      color: "orange" as const,
+      items: audit.policy_violations.map(
+        (violation) => ({
+          title: violation.rule_name,
+          fields: [
+            { label: "Item", value: violation.item_name },
+            {
+              label: "Amount",
+              value: formatCurrency(
+                violation.amount_impacted
+              ),
+            },
+            {
+              label: "Recommendation",
+              value: violation.recommendation,
+            },
+          ],
+        })
+      ),
+    },
+  ];
 
-                <div className="space-y-3">
-                    {audit.medical_legibility.flagged_items.map(
-                        (item, index) => (
-                            <IssueItem
-                                key={index}
-                                title={item.item_name}
-                                color="red"
-                                className="hover:scale-[1.01] transition duration-200 cursor-pointer"
-                                fields={[
-                                    { label: "Reason", value: item.flag_reason },
-                                    {
-                                        label: "Recommendation",
-                                        value: item.recommendation,
-                                    },
-                                ]}
-                            />
-                        )
-                    )}
-                </div>
-            </div>
+  return (
+    <SectionCard title="Audit Issues">
+      {sections.map((section) => (
+        <div key={section.title} className="mb-6">
+          <h3
+            className={`font-semibold mb-2 ${
+              section.color === "red"
+                ? "text-red-600"
+                : "text-orange-600"
+            }`}
+          >
+            {section.title} ({section.items.length})
+          </h3>
 
-            {/* Policy Violations */}
-            <div>
-                <h3 className="font-semibold text-orange-600 mb-2">
-                    Policy Violations ({audit.policy_violations.length})
-                </h3>
-
-                <div className="space-y-3">
-                    {audit.policy_violations.map(
-                        (violation, index) => (
-                            <IssueItem
-                                key={index}
-                                title={violation.rule_name}
-                                color="orange"
-                                className="hover:scale-[1.01] transition duration-200 cursor-pointer"
-                                fields={[
-                                    {
-                                        label: "Item",
-                                        value: violation.item_name,
-                                    },
-                                    {
-                                        label: "Amount",
-                                        value: formatCurrency(
-                                            violation.amount_impacted
-                                        ),
-                                    },
-                                    {
-                                        label: "Recommendation",
-                                        value: violation.recommendation,
-                                    },
-                                ]}
-                            />
-                        )
-                    )}
-                </div>
-            </div>
-        </SectionCard>
-    );
+          <div className="space-y-3">
+            {section.items.map((item, index) => (
+              <IssueItem
+                key={`${section.title}-${index}`}
+                title={item.title}
+                color={section.color}
+                className="hover:scale-[1.01] transition duration-200"
+                fields={item.fields}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
+    </SectionCard>
+  );
 };
 
 export default AuditIssues;

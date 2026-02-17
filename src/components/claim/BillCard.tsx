@@ -14,12 +14,11 @@ const BillCardComponent = ({ bill }: Props) => {
     setOpen((prev) => !prev);
   }, []);
 
-  const { invoice_number, bill_date, page_number, net_amount } =
-    bill.bill;
+  const { invoice_number, bill_date, page_number, net_amount } = bill.bill;
 
   return (
     <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
-      {/* Header */}
+      
       <button
         onClick={toggle}
         className="w-full p-4 flex justify-between items-center text-left hover:bg-gray-50 transition"
@@ -27,15 +26,9 @@ const BillCardComponent = ({ bill }: Props) => {
       >
         <div className="space-y-1">
           <p className="font-semibold">{invoice_number}</p>
-          <p className="text-sm text-gray-500">
-            Date: {bill_date}
-          </p>
-          <p className="text-sm text-gray-500">
-            Page: {page_number}
-          </p>
-          <p className="text-sm font-medium">
-            {formatCurrency(net_amount)}
-          </p>
+          <p className="text-sm text-gray-500">Date: {bill_date}</p>
+          <p className="text-sm text-gray-500">Page: {page_number}</p>
+          <p className="text-sm font-medium">{formatCurrency(net_amount)}</p>
         </div>
 
         <span className="text-sm text-blue-600 font-medium">
@@ -43,7 +36,7 @@ const BillCardComponent = ({ bill }: Props) => {
         </span>
       </button>
 
-      {/* Table */}
+      
       {open && (
         <div className="border-t p-4 overflow-x-auto">
           <table className="w-full text-sm">

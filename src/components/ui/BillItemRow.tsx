@@ -2,11 +2,11 @@ import { formatCurrency } from "../../utils/format";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
-    name: string;
-    category: string;
-    amount: number;
-    isNme: boolean;
-    deductionReason?: string;
+  name: string;
+  category: string;
+  amount: number;
+  isNme: boolean;
+  deductionReason?: string;
 }
 
 const BillItemRow = ({
@@ -16,7 +16,6 @@ const BillItemRow = ({
   isNme,
   deductionReason,
 }: Props) => {
-
   const cleanedReason = deductionReason
     ?.replace(/nme/gi, "")
     .replace(/\s+/g, " ")
@@ -27,7 +26,7 @@ const BillItemRow = ({
       <tr
         className={twMerge(
           "border-b hover:bg-gray-50 transition",
-          isNme && "bg-red-50"
+          isNme && "bg-red-50",
         )}
       >
         <td className="py-2">{name}</td>
@@ -45,8 +44,7 @@ const BillItemRow = ({
       {isNme && cleanedReason && (
         <tr className="bg-red-50/40 border-b">
           <td colSpan={4} className="px-4 py-2 text-xs text-red-600">
-            <span className="font-medium">Reason:</span>{" "}
-            {cleanedReason}
+            <span className="font-medium">Reason:</span> {cleanedReason}
           </td>
         </tr>
       )}

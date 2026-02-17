@@ -1,6 +1,3 @@
-
-
-
 import SplitLayout from "./components/layout/SplitLayout";
 import ClaimSummary from "./components/claim/ClaimSummary";
 import PatientInfo from "./components/claim/PatientInfo";
@@ -18,7 +15,6 @@ import PDFViewer from "./components/pdf/PDFViewer";
 const claimData = data as ClaimData;
 
 function App() {
-
   // const PDFViewer = lazy(()=>import("./components/pdf/PDFViewer"));
 
   return (
@@ -31,11 +27,7 @@ function App() {
       }
       right={
         <div className="flex flex-col h-screen">
-
-          <Header
-            claimId={claimData.claim_id}
-            status={claimData.status}
-          />
+          <Header claimId={claimData.claim_id} status={claimData.status} />
           <div className="space-y-6">
             <ClaimSummary data={claimData} />
             <PatientInfo data={claimData} />

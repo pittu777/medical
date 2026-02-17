@@ -35,9 +35,7 @@ const ClaimSummary = ({ data }: Props) => {
       label: "Discrepancy",
       value: formatCurrency(audit.discrepancy_amount),
       bg: isDiscrepancyHigh ? "bg-red-50" : "bg-green-50",
-      text: isDiscrepancyHigh
-        ? "text-red-600"
-        : "text-green-700",
+      text: isDiscrepancyHigh ? "text-red-600" : "text-green-700",
     },
   ];
 
@@ -48,7 +46,7 @@ const ClaimSummary = ({ data }: Props) => {
         <span
           className={twMerge(
             "px-3 py-1 text-xs rounded-full",
-            statusMap[status] || "bg-gray-100 text-gray-600"
+            statusMap[status] || "bg-gray-100 text-gray-600",
           )}
         >
           {status}
@@ -57,46 +55,28 @@ const ClaimSummary = ({ data }: Props) => {
     >
       <div className="flex gap-6 text-sm text-gray-600">
         <p>
-          <span className="font-medium">Claim ID:</span>{" "}
-          {claim_id}
+          <span className="font-medium">Claim ID:</span> {claim_id}
         </p>
         <p>
-          <span className="font-medium">Type:</span>{" "}
-          {claim_type}
+          <span className="font-medium">Type:</span> {claim_type}
         </p>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
         {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className={twMerge(
-              "p-4 rounded-lg",
-              stat.bg
-            )}
-          >
-            <p className="text-sm text-gray-500">
-              {stat.label}
-            </p>
-            <p
-              className={twMerge(
-                "text-lg font-semibold",
-                stat.text
-              )}
-            >
+          <div key={stat.label} className={twMerge("p-4 rounded-lg", stat.bg)}>
+            <p className="text-sm text-gray-500">{stat.label}</p>
+            <p className={twMerge("text-lg font-semibold", stat.text)}>
               {stat.value}
             </p>
           </div>
         ))}
       </div>
 
-     
       <div
         className={twMerge(
           "text-sm pl-3 border-l-4 text-gray-600",
-          isDiscrepancyHigh
-            ? "border-red-400"
-            : "border-green-400"
+          isDiscrepancyHigh ? "border-red-400" : "border-green-400",
         )}
       >
         {audit.discrepancy_reason}

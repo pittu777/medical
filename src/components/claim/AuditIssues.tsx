@@ -12,40 +12,34 @@ const AuditIssues = ({ audit }: Props) => {
     {
       title: "Medical Legibility Issues",
       color: "red" as const,
-      items: audit.medical_legibility.flagged_items.map(
-        (item) => ({
-          title: item.item_name,
-          fields: [
-            { label: "Reason", value: item.flag_reason },
-            {
-              label: "Recommendation",
-              value: item.recommendation,
-            },
-          ],
-        })
-      ),
+      items: audit.medical_legibility.flagged_items.map((item) => ({
+        title: item.item_name,
+        fields: [
+          { label: "Reason", value: item.flag_reason },
+          {
+            label: "Recommendation",
+            value: item.recommendation,
+          },
+        ],
+      })),
     },
     {
       title: "Policy Violations",
       color: "orange" as const,
-      items: audit.policy_violations.map(
-        (violation) => ({
-          title: violation.rule_name,
-          fields: [
-            { label: "Item", value: violation.item_name },
-            {
-              label: "Amount",
-              value: formatCurrency(
-                violation.amount_impacted
-              ),
-            },
-            {
-              label: "Recommendation",
-              value: violation.recommendation,
-            },
-          ],
-        })
-      ),
+      items: audit.policy_violations.map((violation) => ({
+        title: violation.rule_name,
+        fields: [
+          { label: "Item", value: violation.item_name },
+          {
+            label: "Amount",
+            value: formatCurrency(violation.amount_impacted),
+          },
+          {
+            label: "Recommendation",
+            value: violation.recommendation,
+          },
+        ],
+      })),
     },
   ];
 
@@ -55,9 +49,7 @@ const AuditIssues = ({ audit }: Props) => {
         <div key={section.title} className="mb-6">
           <h3
             className={`font-semibold mb-2 ${
-              section.color === "red"
-                ? "text-red-600"
-                : "text-orange-600"
+              section.color === "red" ? "text-red-600" : "text-orange-600"
             }`}
           >
             {section.title} ({section.items.length})

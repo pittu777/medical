@@ -22,11 +22,7 @@ const PatientInfo = ({ data }: Props) => {
     <SectionCard title="Patient Information">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {fields.map(({ label, value }) => (
-          <InfoItem
-            key={label}
-            label={label}
-            value={value || "-"}
-          />
+          <InfoItem key={label} label={label} value={value || "-"} />
         ))}
       </div>
     </SectionCard>

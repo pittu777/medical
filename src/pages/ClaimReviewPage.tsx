@@ -3,7 +3,7 @@ import Header from '../shared/components/layout/Header'
 import PDFViewer from '../shared/components/pdf/PDFViewer'
 import SplitLayout from '../shared/components/layout/SplitLayout'
 import type { ClaimData } from '../features/claim/types/claim.types'
-import data from "./../data/data.json";
+import data from "./../features/claim/data/data.json";
 import { getBills } from '../features/claim/utils/selectors'
 
 const ClaimReviewPage = () => {

@@ -21,7 +21,7 @@ const BillCardComponent = ({ bill }: Props) => {
 
       <button
         onClick={toggle}
-        className="w-full p-4 flex justify-between items-center text-left hover:bg-gray-50 transition"
+        className="w-full p-4 flex justify-between items-center text-left hover:bg-gray-50 transition cursor-pointer"
         aria-expanded={open}
       >
         <div className="space-y-1">

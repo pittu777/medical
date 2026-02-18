@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import type { Bill } from "../types/claim.types";
-import { formatCurrency } from "../../utils/format";
 import BillItemRow from "../../../shared/components/ui/BillItemRow";
+import { formatCurrency } from "../utils/format";
 
 interface Props {
   bill: Bill;

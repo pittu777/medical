@@ -1,7 +1,7 @@
 import type { ClaimData } from "../types/claim.types";
-import { formatCurrency } from "../../utils/format";
 import SectionCard from "../../../shared/components/ui/SectionCard";
 import { twMerge } from "tailwind-merge";
+import { formatCurrency } from "../utils/format";
 
 interface Props {
   data: ClaimData;

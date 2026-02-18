@@ -1,7 +1,7 @@
-import type { AuditAnalysis } from "../../types/claim.types";
-import { formatCurrency } from "../../utils/format";
-import SectionCard from "../ui/SectionCard";
-import IssueItem from "../ui/IssueItem";
+import type { AuditAnalysis } from "../types/claim.types";
+import SectionCard from "../../../shared/components/ui/SectionCard";
+import IssueItem from "../../../shared/components/ui/IssueItem";
+import { formatCurrency } from "../utils/format";
 
 interface Props {
   audit: AuditAnalysis;
@@ -48,9 +48,8 @@ const AuditIssues = ({ audit }: Props) => {
       {sections.map((section) => (
         <div key={section.title} className="mb-6">
           <h3
-            className={`font-semibold mb-2 ${
-              section.color === "red" ? "text-red-600" : "text-orange-600"
-            }`}
+            className={`font-semibold mb-2 ${section.color === "red" ? "text-red-600" : "text-orange-600"
+              }`}
           >
             {section.title} ({section.items.length})
           </h3>

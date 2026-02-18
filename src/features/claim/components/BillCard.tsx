@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
-import type { Bill } from "../../types/claim.types";
+import type { Bill } from "../types/claim.types";
 import { formatCurrency } from "../../utils/format";
-import BillItemRow from "../ui/BillItemRow";
+import BillItemRow from "../../../shared/components/ui/BillItemRow";
 
 interface Props {
   bill: Bill;
@@ -18,7 +18,7 @@ const BillCardComponent = ({ bill }: Props) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
-      
+
       <button
         onClick={toggle}
         className="w-full p-4 flex justify-between items-center text-left hover:bg-gray-50 transition"
@@ -36,7 +36,7 @@ const BillCardComponent = ({ bill }: Props) => {
         </span>
       </button>
 
-      
+
       {open && (
         <div className="border-t p-4 overflow-x-auto">
           <table className="w-full text-sm">

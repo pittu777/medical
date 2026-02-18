@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/format";
+import { formatCurrency } from "../../../features/claim/utils/format";
 import { twMerge } from "tailwind-merge";
 
 interface Props {

@@ -1,7 +1,7 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { usePdfNavigation } from "../../hooks/usePdfNavigation";
-import SectionCard from "../ui/SectionCard";
+import { usePdfNavigation } from "../hooks/usePdfNavigation";
+import SectionCard from "../../../shared/components/ui/SectionCard";
 
 interface PageRange {
   start: number;

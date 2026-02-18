@@ -1,4 +1,4 @@
-import type { Bill } from "../../types/claim.types";
+import type { Bill } from "../types/claim.types";
 import BillCard from "./BillCard";
 
 interface Props {

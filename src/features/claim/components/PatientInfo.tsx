@@ -1,7 +1,7 @@
-import type { ClaimData } from "../../types/claim.types";
+import type { ClaimData } from "../types/claim.types";
 import { getPatientDetails } from "../../utils/selectors";
-import SectionCard from "../ui/SectionCard";
-import InfoItem from "../ui/InfoItem";
+import SectionCard from "../../../shared/components/ui/SectionCard";
+import InfoItem from "../../../shared/components/ui/InfoItem";
 
 interface Props {
   data: ClaimData;
